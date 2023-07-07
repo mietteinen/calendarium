@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include <QLabel>
 
-#include <calendar.hh>
-#include <utilities.hh>
+#include <src/calendar/calendar.hh>
+#include <src/utilities/utilities.hh>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

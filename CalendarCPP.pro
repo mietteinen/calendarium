@@ -9,18 +9,18 @@ CONFIG += c++20
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    calendar.cpp \
+    src/calendar/calendar.cpp \
     main.cpp \
-    mainwindow.cpp \
-    utilities.cpp
+    src/mainwindow/mainwindow.cpp \
+    src/utilities/utilities.cpp
 
 HEADERS += \
-    calendar.hh \
-    mainwindow.hh \
-    utilities.hh
+    src/calendar/calendar.hh \
+    src/mainwindow/mainwindow.hh \
+    src/utilities/utilities.hh
 
 FORMS += \
-    mainwindow.ui
+    ui/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
