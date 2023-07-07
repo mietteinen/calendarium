@@ -11,11 +11,13 @@ CONFIG += c++20
 SOURCES += \
     calendar.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    utilities.cpp
 
 HEADERS += \
     calendar.hh \
-    mainwindow.hh
+    mainwindow.hh \
+    utilities.hh
 
 FORMS += \
     mainwindow.ui

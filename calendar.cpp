@@ -7,67 +7,56 @@ Calendar::Calendar(int year, int month)
 
     findFirstDay();
 
-    if (isLeapYear(year_)) {
+    if (isLeapYear()) {
         monthDays_.at(2) = 29;
     }
+
+    generateCalendar();
+}
+
+std::vector<int> Calendar::getCalendarVector() {
+
+    return calendarVector_;
 }
 
 void Calendar::findFirstDay() {
 
-    /* The equation used for the calculation of
-     * the first day of the month is from the
-     * following link:
-     *
-     *      https://cs.uwaterloo.ca/~alopez-o/math-faq/node73.html
-     */
+    int modifier = (14 - month_) / 12;
+    int yearModified = year_ - modifier;
+    int monthModified = month_ + 12 * modifier - 2;
 
-    int month;
-    int century;
+    // Using Gauss's algorithm to determine the day of the week.
+    firstDay_ = (1 + yearModified + yearModified / 4
+                   - yearModified / 100
+                   + yearModified / 400
+                   + (31 * monthModified) / 12) % 7;
 
-    // Represents the year, for example 2023 -> 23.
-    // January and February are from the previous year.
-    int year;
-
-    century = year_ / 100;
-    year = year_ % 100;
-
-    if (month_ <= 2) {
-        if (month_ == 2) {
-            month = 12;
-        } else {
-            month = 11;
-        }
-        year -= 1;
-
-    } else {
-        month = month_ - 2;
+    // Setting Sunday to 7 to make it more intuitive.
+    if (firstDay_ == 0) {
+        firstDay_ = 7;
     }
-
-    firstDay_ = static_cast<int>(1 + std::floor(2.6 * month)
-              - 2 * century + year + std::floor(year / 4)
-                                   + std::floor(century / 4)) % 7;
 }
 
 void Calendar::generateCalendar() {
 
    int daysInMonth;
 
-   calendar_.clear();
+   calendarVector_.clear();
 
-   daysInMonth = monthDays_.at(year_);
+   daysInMonth = monthDays_.at(month_);
 
-   // Fill the calendar with the appropriate dates
-   int currentDay = 1 - firstDay_;
+   // Fill the calendar with the appropriate dates.
+   int currentDay = 1 - (firstDay_ - 1);
    for (int i = 0; i < 42; ++i) {
        if (currentDay >= 1 && currentDay <= daysInMonth)
-           calendar_.push_back(currentDay);
+           calendarVector_.push_back(currentDay);
        else
-           calendar_.push_back(0);
+           calendarVector_.push_back(0);
 
        currentDay++;
    }
 }
 
-bool Calendar::isLeapYear(int year) const {
-    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+bool Calendar::isLeapYear() const {
+    return (year_ % 4 == 0 && year_ % 100 != 0) || (year_ % 400 == 0);
 }
