@@ -20,15 +20,20 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    /**
+     * @brief Displays the calendar inside
+     * the window.
+     */
+    void createCalendar(int year, int month);
+    void changeMonth(int direction);
+
 private:
     Ui::MainWindow *ui;
 
     Calendar* calendar_;
 
-    /**
-     * @brief Displays the calendar inside
-     * the window.
-     */
-    void createCalendar_();
+    int displayedYear_;
+    int displayedMonth_;
 };
 #endif // MAINWINDOW_HH
