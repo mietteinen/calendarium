@@ -14,9 +14,17 @@ Before building the application, ensure that you have the following prerequisite
 
 ## Build Instructions
 
-1. Clone or download the project repository from [GitHub](https://github.com/mietteinen/calendar-cpp) to your local machine.
+1. Clone or download the project repository from [GitHub](https://github.com/mietteinen/calendar-cpp) to your local machine. To do so, open the terminal and `cd` to the folder you want to clone the project to. Then type the following command:
 
-2. Open a terminal or command prompt and navigate to the project directory.
+    ``` shell
+    git clone https://github.com/mietteinen/calendar-cpp.git
+    ```
+
+2. Navigate to the project directory.
+
+   ``` shell
+    cd calendar-cpp
+    ```
 
 3. Run the following command to generate the project files using qmake:
     
