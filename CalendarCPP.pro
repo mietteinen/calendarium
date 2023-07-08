@@ -11,11 +11,13 @@ CONFIG += c++20
 SOURCES += \
     src/calendar/calendar.cpp \
     main.cpp \
+    src/gui/datelistwidget.cpp \
     src/mainwindow/mainwindow.cpp \
     src/utilities/utilities.cpp
 
 HEADERS += \
     src/calendar/calendar.hh \
+    src/gui/datelistwidget.hh \
     src/mainwindow/mainwindow.hh \
     src/utilities/utilities.hh
 

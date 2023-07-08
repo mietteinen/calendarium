@@ -12,6 +12,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->yearBox->setText(QString::number(currentDate.first));
     ui->monthBox->setText(QString::number(currentDate.second));
 
+    ui->yearBox->setMaximumWidth(50);
+    ui->monthBox->setMaximumWidth(50);
+
+    ui->nextMonthButton->setMaximumWidth(30);
+    ui->nextMonthButton->setMinimumHeight(30);
+
+    ui->prevMonthButton->setMaximumWidth(30);
+    ui->prevMonthButton->setMinimumHeight(30);
+
     connect(ui->makerButton, &QPushButton::clicked,
                        this, &MainWindow::createCalendar_);
 
@@ -45,8 +54,16 @@ void MainWindow::createCalendar_() {
     int row = 0;
     int col = 0;
     for (int day : calendarVector) {
-        QLabel* label = new QLabel(QString::number(day));
-        ui->calendarGrid->addWidget(label, row, col);
+
+        DateListWidget* date = new DateListWidget(day);
+
+        if (day == 0) {
+            if (row == 5) {
+                break;
+            }
+        } else {
+            ui->calendarGrid->addWidget(date, row, col);
+        }
 
         // Increment the row and column
         col++;

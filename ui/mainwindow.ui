@@ -16,16 +16,109 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="2" column="2">
+     <layout class="QGridLayout" name="topGrid">
+      <item row="1" column="0">
+       <widget class="QLabel" name="monthLabel">
+        <property name="text">
+         <string>Month:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="monthBox"/>
+      </item>
+      <item row="3" column="5">
+       <layout class="QHBoxLayout" name="navigationLayout">
+        <property name="spacing">
+         <number>1</number>
+        </property>
+        <item>
+         <spacer name="navigationSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="prevMonthButton">
+          <property name="text">
+           <string>&lt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="nextMonthButton">
+          <property name="text">
+           <string>&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="3" rowspan="2" colspan="2">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Yrsa</family>
+          <pointsize>42</pointsize>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>CALENDARiUM</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="yearLabel">
+        <property name="text">
+         <string>Year:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="yearBox"/>
+      </item>
+      <item row="3" column="2">
        <widget class="QPushButton" name="makerButton">
         <property name="text">
          <string>Make Calendar</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <spacer name="horizontalSpacer">
+      <item row="0" column="5">
+       <layout class="QHBoxLayout" name="quitLayout">
+        <item>
+         <spacer name="quitSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="quitButton">
+          <property name="text">
+           <string>Quit</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="5">
+       <spacer name="rightTopSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -37,27 +130,14 @@
         </property>
        </spacer>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="yearLabel">
-        <property name="text">
-         <string>Year:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="monthLabel">
-        <property name="text">
-         <string>Month:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="monthBox"/>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="yearBox"/>
-      </item>
      </layout>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
     </item>
     <item>
      <layout class="QGridLayout" name="calendarGrid"/>
@@ -77,5 +157,22 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>quitButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>729</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>783</x>
+     <y>118</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
