@@ -7,19 +7,35 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
+    monthNames_ = {"", "January", "February", "March",
+                   "April", "May", "June", "July", "August",
+                   "September", "October", "November", "December"};
+
+    QFontDatabase::addApplicationFont(":/fonts/LemonMilk.otf");
+    QFont titleFont = QFont("LemonMilk", 24);
+
     std::pair<int, int> currentDate = util::getCurrentYearAndMonth();
 
-    ui->yearBox->setText(QString::number(currentDate.first));
-    ui->monthBox->setText(QString::number(currentDate.second));
+    ui->yearSearchBox->setText(QString::number(currentDate.first));
+    ui->monthSearchBox->setText(QString::number(currentDate.second));
 
-    ui->yearBox->setMaximumWidth(50);
-    ui->monthBox->setMaximumWidth(50);
+    ui->yearSearchBox->setMaximumWidth(50);
+    ui->monthSearchBox->setMaximumWidth(50);
+
+    ui->searchButton->setMaximumWidth(100);
 
     ui->nextMonthButton->setMaximumWidth(30);
     ui->nextMonthButton->setMinimumHeight(30);
 
     ui->prevMonthButton->setMaximumWidth(30);
     ui->prevMonthButton->setMinimumHeight(30);
+
+    ui->yearNumberLabel->setFont(titleFont);
+    ui->monthNameLabel->setFont(titleFont);
+
+    ui->yearLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->monthLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->yearNumberLabel->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
 
     // Connect next month button
     connect(ui->nextMonthButton, &QPushButton::clicked, this, [this]() {
@@ -30,9 +46,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->prevMonthButton, &QPushButton::clicked, this, [this]() {
         changeMonth(-1);
     });
-    connect(ui->makerButton, &QPushButton::clicked, this, [this]() {
-        int year = ui->yearBox->text().toInt();
-        int month = ui->monthBox->text().toInt();
+    connect(ui->searchButton, &QPushButton::clicked, this, [this]() {
+        int year = ui->yearSearchBox->text().toInt();
+        int month = ui->monthSearchBox->text().toInt();
         createCalendar(year, month);
     });
 
@@ -68,14 +84,29 @@ void MainWindow::createCalendar(int year, int month) {
     int col = 0;
     for (int day : calendarVector) {
 
-        DateListWidget* date = new DateListWidget(day);
-
         if (day == 0) {
             if (row == 5) {
                 break;
             }
         } else {
-            ui->calendarGrid->addWidget(date, row, col);
+            // Create a custom QFrame to allow for more styling.
+            QFrame* frame = new QFrame;
+            frame->setStyleSheet("QFrame { padding: 2px; "
+                                          "border: 1px solid black; "
+                                          "border-radius: 2px }");
+
+            // Create a layout for the frame
+            QHBoxLayout* frameLayout = new QHBoxLayout(frame);
+            frameLayout->setContentsMargins(0, 0, 0, 0);
+
+            // Create the DateListWidget and set it as the child of the frame.
+            DateListWidget* date = new DateListWidget(day);
+            date->setStyleSheet("border: none; background-color: transparent");
+
+            frameLayout->addWidget(date);
+
+            // Add the frame to the grid layout.
+            ui->calendarGrid->addWidget(frame, row, col);
         }
 
         // Increment the row and column
@@ -85,6 +116,8 @@ void MainWindow::createCalendar(int year, int month) {
             row++;
         }
     }
+    ui->yearNumberLabel->setText(QString::number(year));
+    ui->monthNameLabel->setText(monthNames_.at(month));
 }
 
 void MainWindow::changeMonth(int direction) {
@@ -100,8 +133,8 @@ void MainWindow::changeMonth(int direction) {
         displayedMonth_ = (displayedMonth_ + 11) % 12 + 1;
     }
 
-    ui->yearBox->setText(QString::number(displayedYear_));
-    ui->monthBox->setText(QString::number(displayedMonth_));
+    ui->yearSearchBox->setText(QString::number(displayedYear_));
+    ui->monthSearchBox->setText(QString::number(displayedMonth_));
 
     createCalendar(displayedYear_, displayedMonth_);
 }

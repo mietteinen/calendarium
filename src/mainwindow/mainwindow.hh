@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QFontDatabase>
 
 #include <src/calendar/calendar.hh>
 #include <src/utilities/utilities.hh>
@@ -35,5 +36,7 @@ private:
 
     int displayedYear_;
     int displayedMonth_;
+
+    std::vector<QString> monthNames_;
 };
 #endif // MAINWINDOW_HH
