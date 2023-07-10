@@ -93,7 +93,7 @@ void MainWindow::createCalendar(int year, int month) {
             QFrame* frame = new QFrame;
             frame->setStyleSheet("QFrame { padding: 2px; "
                                           "border: 1px solid black; "
-                                          "border-radius: 2px }");
+                                          "border-radius: 6px }");
 
             // Create a layout for the frame
             QHBoxLayout* frameLayout = new QHBoxLayout(frame);
