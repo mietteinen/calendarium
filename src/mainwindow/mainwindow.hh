@@ -30,6 +30,7 @@ private slots:
      */
     void createCalendar(int year, int month);
     void changeMonth(int direction);
+    void changeColorMode(bool darkMode);
 
 private:
     Ui::MainWindow *ui;

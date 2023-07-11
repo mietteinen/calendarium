@@ -39,27 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->monthLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
     ui->yearNumberLabel->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
 
-    // STYLESHEETS FOR SIGNIFICANT WIDGETS
-    setStyleSheet("QMainWindow {"
-                  "background-color: " + Colors::lightMain + ";"
-                  "}"
-                  "QPushButton {"
-                  "border: none;"
-                  "border-radius: 6px;"
-                  "background-color: " + Colors::accentColor + ";"
-                  "color: #FFFFFF;"
-                  "padding: 2px;"
-                  "}"
-                  "QPushButton:hover {"
-                  "background-color: #DDDDDD;"
-                  "}"
-                  "QPushButton:pressed {"
-                  "background-color: #AAAAAA;"
-                  "}"
-                  "QLineEdit {"
-                  "background-color: " + Colors::lightSecondary + ";"
-                  "border-radius: 6px;"
-                  "}");
+    ui->colorModeButton->setCheckable(true);
 
     // Connect next month button
     connect(ui->nextMonthButton, &QPushButton::clicked, this, [this]() {
@@ -76,13 +56,16 @@ MainWindow::MainWindow(QWidget *parent)
         createCalendar(year, month);
     });
 
+    connect(ui->colorModeButton, &QPushButton::toggled,
+                           this, &MainWindow::changeColorMode);
+
     displayedYear_ = currentDate.first;
     displayedMonth_ = currentDate.second;
 
     createCalendar(displayedYear_,
                    displayedMonth_);
 
-
+    changeColorMode(false);
 }
 
 MainWindow::~MainWindow() {
@@ -165,5 +148,65 @@ void MainWindow::changeMonth(int direction) {
     ui->monthSearchBox->setText(QString::number(displayedMonth_));
 
     createCalendar(displayedYear_, displayedMonth_);
+}
+
+void MainWindow::changeColorMode(bool darkMode) {
+
+    if (darkMode) {
+        setStyleSheet("QMainWindow {"
+                      "background-color: " + Colors::darkMain + ";"
+                      "}"
+                      "QPushButton {"
+                      "border: none;"
+                      "border-radius: 6px;"
+                      "background-color: " + Colors::accentColor + ";"
+                      "color: #FFFFFF;"
+                      "padding: 2px;"
+                      "}"
+                      "QPushButton:hover {"
+                      "background-color: #DDDDDD;"
+                      "}"
+                      "QPushButton:pressed {"
+                      "background-color: #AAAAAA;"
+                      "}"
+                      "QLineEdit {"
+                      "background-color: " + Colors::darkSecondary + ";"
+                      "border-radius: 6px;"
+                      "}");
+        ui->monthNameLabel->setStyleSheet("QLabel {"
+                                          "color: " + Colors::lightMain + ";"
+                                          "}");
+        ui->yearNumberLabel->setStyleSheet("QLabel {"
+                                           "color: " + Colors::lightMain + ";"
+                                           "}");
+
+    } else {
+        setStyleSheet("QMainWindow {"
+                      "background-color: " + Colors::lightMain + ";"
+                      "}"
+                      "QPushButton {"
+                      "border: none;"
+                      "border-radius: 6px;"
+                      "background-color: " + Colors::accentColor + ";"
+                      "color: #FFFFFF;"
+                      "padding: 2px;"
+                      "}"
+                      "QPushButton:hover {"
+                      "background-color: #DDDDDD;"
+                      "}"
+                      "QPushButton:pressed {"
+                      "background-color: #AAAAAA;"
+                      "}"
+                      "QLineEdit {"
+                      "background-color: " + Colors::lightSecondary + ";"
+                      "border-radius: 6px;"
+                      "}");
+        ui->monthNameLabel->setStyleSheet("QLabel {"
+                                          "color: " + Colors::darkMain + ";"
+                                          "}");
+        ui->yearNumberLabel->setStyleSheet("QLabel {"
+                                           "color: " + Colors::darkMain + ";"
+                                           "}");
+    }
 }
 

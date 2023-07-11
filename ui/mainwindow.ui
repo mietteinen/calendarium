@@ -25,6 +25,7 @@
            <font>
             <family>Ubuntu</family>
             <pointsize>42</pointsize>
+            <weight>50</weight>
             <italic>false</italic>
             <bold>false</bold>
            </font>
@@ -99,6 +100,13 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="3" column="2">
+       <widget class="QPushButton" name="colorModeButton">
+        <property name="text">
+         <string>Mode</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
