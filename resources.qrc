@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/fonts">
         <file>fonts/LemonMilk.otf</file>
+        <file>fonts/Homeback.otf</file>
+        <file>fonts/Inconsolata-Medium.ttf</file>
+        <file>fonts/Karla-SemiBold.ttf</file>
     </qresource>
 </RCC>

@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
                    "April", "May", "June", "July", "August",
                    "September", "October", "November", "December"};
 
-    QFontDatabase::addApplicationFont(":/fonts/LemonMilk.otf");
-    QFont titleFont = QFont("LemonMilk", 24);
+    titleFont_ = QFont("Karla SemiBold", 24);
+    navigationFont_ = QFont("Karla SemiBold", 11);
 
     std::pair<int, int> currentDate = util::getCurrentYearAndMonth();
 
@@ -24,18 +24,42 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->searchButton->setMaximumWidth(100);
 
-    ui->nextMonthButton->setMaximumWidth(30);
+    ui->nextMonthButton->setMinimumWidth(30);
     ui->nextMonthButton->setMinimumHeight(30);
+    ui->nextMonthButton->setFont(navigationFont_);
 
-    ui->prevMonthButton->setMaximumWidth(30);
+    ui->prevMonthButton->setMinimumWidth(30);
     ui->prevMonthButton->setMinimumHeight(30);
+    ui->prevMonthButton->setFont(navigationFont_);
 
-    ui->yearNumberLabel->setFont(titleFont);
-    ui->monthNameLabel->setFont(titleFont);
+    ui->yearNumberLabel->setFont(titleFont_);
+    ui->monthNameLabel->setFont(titleFont_);
 
     ui->yearLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
     ui->monthLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
     ui->yearNumberLabel->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
+
+    // STYLESHEETS FOR SIGNIFICANT WIDGETS
+    setStyleSheet("QMainWindow {"
+                  "background-color: " + Colors::lightMain + ";"
+                  "}"
+                  "QPushButton {"
+                  "border: none;"
+                  "border-radius: 6px;"
+                  "background-color: " + Colors::accentColor + ";"
+                  "color: #FFFFFF;"
+                  "padding: 2px;"
+                  "}"
+                  "QPushButton:hover {"
+                  "background-color: #DDDDDD;"
+                  "}"
+                  "QPushButton:pressed {"
+                  "background-color: #AAAAAA;"
+                  "}"
+                  "QLineEdit {"
+                  "background-color: " + Colors::lightSecondary + ";"
+                  "border-radius: 6px;"
+                  "}");
 
     // Connect next month button
     connect(ui->nextMonthButton, &QPushButton::clicked, this, [this]() {
@@ -57,6 +81,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     createCalendar(displayedYear_,
                    displayedMonth_);
+
+
 }
 
 MainWindow::~MainWindow() {
@@ -93,7 +119,9 @@ void MainWindow::createCalendar(int year, int month) {
             QFrame* frame = new QFrame;
             frame->setStyleSheet("QFrame { padding: 2px; "
                                           "border: 1px solid black; "
-                                          "border-radius: 6px }");
+                                          "border-radius: 6px;"
+                                          "background-color: " + Colors::primaryColor
+                                          + " }");
 
             // Create a layout for the frame
             QHBoxLayout* frameLayout = new QHBoxLayout(frame);

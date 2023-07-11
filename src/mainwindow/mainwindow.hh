@@ -4,10 +4,12 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QFontDatabase>
+#include <QDebug>
 
 #include <src/calendar/calendar.hh>
-#include <src/utilities/utilities.hh>
 #include <src/gui/datelistwidget.hh>
+#include <src/utilities/utilities.hh>
+#include <src/utilities/constants.hh>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,6 +33,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QFont titleFont_;
+    QFont navigationFont_;
 
     Calendar* calendar_;
 

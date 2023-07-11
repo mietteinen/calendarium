@@ -17,8 +17,10 @@ SOURCES += \
 
 HEADERS += \
     src/calendar/calendar.hh \
+    src/constants/constants.hh \
     src/gui/datelistwidget.hh \
     src/mainwindow/mainwindow.hh \
+    src/utilities/constants.hh \
     src/utilities/utilities.hh
 
 FORMS += \

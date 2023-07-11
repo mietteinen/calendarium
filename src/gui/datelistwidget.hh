@@ -3,6 +3,7 @@
 
 #include <QListWidget>
 #include <QLabel>
+#include <QFont>
 
 class DateListWidget : public QListWidget {
 
@@ -13,6 +14,9 @@ public:
      * @brief To be done, for adding new events.
      */
     void addDate();
+
+private:
+    QFont dateNumberFont;
 };
 
 #endif // DATELISTWIDGET_HH
