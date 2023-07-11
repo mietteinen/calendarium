@@ -62,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     displayedYear_ = currentDate.first;
     displayedMonth_ = currentDate.second;
 
+    calendar_ = nullptr;
     createCalendar(displayedYear_,
                    displayedMonth_);
 
@@ -75,7 +76,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::createCalendar(int year, int month) {
 
-    delete calendar_;
+    if (calendar_) { delete calendar_; }
 
     calendar_ = new Calendar(year, month);
 
