@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->monthSearchBox->setMaximumWidth(50);
 
     ui->searchButton->setMaximumWidth(100);
+    ui->searchButton->setMinimumWidth(100);
 
     ui->nextMonthButton->setMinimumWidth(30);
     ui->nextMonthButton->setMinimumHeight(30);
@@ -31,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->prevMonthButton->setMinimumWidth(30);
     ui->prevMonthButton->setMinimumHeight(30);
     ui->prevMonthButton->setFont(navigationFont_);
+
+    ui->colorModeButton->setMaximumWidth(100);
+    ui->colorModeButton->setMinimumWidth(100);
 
     ui->yearNumberLabel->setFont(titleFont_);
     ui->monthNameLabel->setFont(titleFont_);
@@ -165,10 +169,10 @@ void MainWindow::changeColorMode(bool darkMode) {
                       "padding: 4px;"
                       "}"
                       "QPushButton:hover {"
-                      "background-color: #DDDDDD;"
+                      "background-color: " + Colors::primaryColor + ";"
                       "}"
                       "QPushButton:pressed {"
-                      "background-color: #AAAAAA;"
+                      "background-color: " + Colors::accentColor + ";"
                       "}"
                       "QLineEdit {"
                       "color: " + Colors::lightMain + ";"
@@ -201,10 +205,10 @@ void MainWindow::changeColorMode(bool darkMode) {
                       "padding: 4px;"
                       "}"
                       "QPushButton:hover {"
-                      "background-color: #DDDDDD;"
+                      "background-color: " + Colors::primaryColor + ";"
                       "}"
                       "QPushButton:pressed {"
-                      "background-color: #AAAAAA;"
+                      "background-color: " + Colors::accentColor + ";"
                       "}"
                       "QLineEdit {"
                       "color: " + Colors::darkMain + ";"
