@@ -8,6 +8,7 @@ namespace Colors {
 
     /*
      * https://realtimecolors.com/?colors=fafffe-000504-0a4770-070a3b-0a1570
+     * https://realtimecolors.com/?colors=020809-d4f4f7-7fdfe6-d4f4f7-2acad5
      */
 
     //static const QString accentColor = "#0a1570";
