@@ -1,16 +1,28 @@
 # A desktop calendar app
 
-A simple desktop calendar for keeping track of upcoming activities (that functionality is coming later).
+A simple and lightweight desktop calendar for keeping track of upcoming activities (that functionality is coming later).
 
-The program is written in C++, and is based on a school Tkinter GUI project written by the author of this program.
+The program is written in C++, and is based on a Tkinter GUI program written by the author of this program as a school project.
+
+
+# Author
+
+The author of this GUI application is Tomi Miettinen, a second-year Computer Science student.
+
 
 # How to build and run
 
+Running the program
+
+
 ## Prerequisites
 
-Before building the application, ensure that you have the following prerequisites installed on your system:
+Before building the application, ensure that you have the following tools installed on your system:
 
-- [Qt](https://www.qt.io/download) framework (version 4.0.0 or higher)
+- [Qt](https://www.qt.io/download) framework (version 5.0.0 or higher)
+
+    - Some version of `qmake` and `make` (should come with Qt).
+
 
 ## Build Instructions
 
@@ -31,14 +43,18 @@ Before building the application, ensure that you have the following prerequisite
     ``` shell
    qmake
    ```
-   This command generates the necessary makefiles or build files based on the .pro file in the project directory.
+   This command generates the necessary makefiles or build files based on the `.pro` file in the project directory.
 
-4. Once the project files are generated, you can build the project using the appropriate build command for your platform. For example:
+4. Once the project files are generated, you can build the project by running `make`, which is usually installed alongside Qt. This should create an executable for the desired operating system.
 
-    - **Linux/macOS**: Run the `make` command.
-    - **Windows**: Open the generated Visual Studio solution (`calendar-cpp.sln`) and build it using Visual Studio. Alternatively, you can use the `nmake` command from the Visual Studio command prompt.
+    **Note**: The `qmake` and `make` tools have different versions. If your terminal does not find one of the tools, it can usually be found in the Qt installation folder.
+   
+    - On **Windows** I had to navigate to `C:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin\` where I found my version, which was `mingw32-make`.
+
+    - On **Linux** the tools worked as they should, but they could be found at `~/<user>/Qt/6.1.1/gcc_64/bin/` if needed.
   
-5. Now the executable should have been generated in the build output directory. On a Linux machine, navigating to the correct folder and typing `./calendar-cpp` runs the application. If you are on a Windows machine, typing `calendar-cpp.exe` should do the trick.
+6. Now the executable should have been generated in the build output directory. On a Linux machine, navigating to the correct folder and typing `./<executable>` runs the application (replace <executable> with the name, in this case most likely CalendarCPP). If you are on a Windows machine, just double clicking the newly generated `.exe` does the trick.
+
 
 ## Additional Notes
 
