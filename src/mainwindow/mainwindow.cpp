@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
+    QApplication::instance()->installEventFilter(this);
+
     monthNames_ = {"", "January", "February", "March",
                    "April", "May", "June", "July", "August",
                    "September", "October", "November", "December"};
@@ -36,6 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->colorModeButton->setMaximumWidth(100);
     ui->colorModeButton->setMinimumWidth(100);
 
+    ui->miniCalendarButton->setMaximumWidth(100);
+    ui->miniCalendarButton->setMinimumWidth(100);
+    ui->miniCalendarButton->setCheckable(true);
+
     ui->yearNumberLabel->setFont(titleFont_);
     ui->monthNameLabel->setFont(titleFont_);
 
@@ -54,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->prevMonthButton, &QPushButton::clicked, this, [this]() {
         changeMonth(-1);
     });
+
     connect(ui->searchButton, &QPushButton::clicked, this, [this]() {
         int year = ui->yearSearchBox->text().toInt();
         int month = ui->monthSearchBox->text().toInt();
@@ -62,6 +69,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->colorModeButton, &QPushButton::toggled,
                            this, &MainWindow::changeColorMode);
+
+    connect(ui->miniCalendarButton, &QPushButton::toggled,
+                              this, &MainWindow::openMiniCalendar);
 
     displayedYear_ = currentDate.first;
     displayedMonth_ = currentDate.second;
@@ -76,6 +86,29 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow() {
     delete calendar_;
     delete ui;
+}
+
+bool MainWindow::eventFilter(QObject *object, QEvent *event) {
+
+    if (miniCalendar && event->type() == QEvent::MouseButtonPress)
+    {
+        QWidget* clickedWidget = qobject_cast<QWidget*>(object);
+        if (clickedWidget)
+        {
+            // Check if the clicked widget is neither
+            // the miniCalendar nor its descendant.
+            if (clickedWidget != miniCalendar &&
+                clickedWidget != ui->miniCalendarButton &&
+                !miniCalendar->isAncestorOf(clickedWidget))
+            {
+                // Delete the miniCalendar and set the pointer to nullptr
+                delete miniCalendar;
+                miniCalendar = nullptr;
+            }
+        }
+    }
+
+    return QMainWindow::eventFilter(object, event);
 }
 
 void MainWindow::createCalendar(int year, int month) {
@@ -196,6 +229,7 @@ void MainWindow::changeColorMode(bool darkMode) {
     } else {
         setStyleSheet("QMainWindow {"
                       "background-color: " + Colors::lightMain + ";"
+                      "border-color: " + Colors::primaryColor + ";"
                       "}"
                       "QPushButton {"
                       "border: none;"
@@ -229,5 +263,27 @@ void MainWindow::changeColorMode(bool darkMode) {
                                      "color: " + Colors::darkMain + ";"
                                      "}");
     }
+}
+
+void MainWindow::openMiniCalendar() {
+
+    // Check if miniCalendar is already open.
+    if (miniCalendar) { return; }
+
+    // Create an instance of MiniCalendarWidget.
+    miniCalendar = new MiniCalendarWidget(2023, this);
+
+    // Find the position of miniCalendarButton and place
+    // miniCalendar under it.
+    QPoint buttonPos = ui->miniCalendarButton
+            ->mapToGlobal(QPoint(0, ui->miniCalendarButton->height()));
+    miniCalendar->move(buttonPos);
+
+    // Set window flags for miniCalendar.
+    miniCalendar->setWindowFlags(Qt::Window |
+                                 Qt::FramelessWindowHint |
+                                 Qt::WindowStaysOnTopHint);
+
+    miniCalendar->show();
 }
 

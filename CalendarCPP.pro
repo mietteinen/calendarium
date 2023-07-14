@@ -12,19 +12,22 @@ SOURCES += \
     src/calendar/calendar.cpp \
     main.cpp \
     src/gui/datelistwidget.cpp \
+    src/gui/minicalendarwidget.cpp \
     src/mainwindow/mainwindow.cpp \
-    src/utilities/utilities.cpp
+    src/utilities/utilities.cpp \
 
 HEADERS += \
     src/calendar/calendar.hh \
     src/constants/constants.hh \
     src/gui/datelistwidget.hh \
+    src/gui/minicalendarwidget.hh \
     src/mainwindow/mainwindow.hh \
     src/utilities/constants.hh \
-    src/utilities/utilities.hh
+    src/utilities/utilities.hh \
 
 FORMS += \
-    ui/mainwindow.ui
+    ui/mainwindow.ui \
+    ui/minicalendarwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

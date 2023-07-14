@@ -8,6 +8,7 @@
 
 #include <src/calendar/calendar.hh>
 #include <src/gui/datelistwidget.hh>
+#include <src/gui/minicalendarwidget.hh>
 #include <src/utilities/utilities.hh>
 #include <src/utilities/constants.hh>
 
@@ -23,6 +24,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    bool eventFilter(QObject* object, QEvent* event) override;
+
 private slots:
     /**
      * @brief Displays the calendar inside
@@ -31,6 +35,7 @@ private slots:
     void createCalendar(int year, int month);
     void changeMonth(int direction);
     void changeColorMode(bool darkMode);
+    void openMiniCalendar();
 
 private:
     Ui::MainWindow *ui;
@@ -44,5 +49,6 @@ private:
     int displayedMonth_;
 
     std::vector<QString> monthNames_;
+    MiniCalendarWidget* miniCalendar;
 };
 #endif // MAINWINDOW_HH
