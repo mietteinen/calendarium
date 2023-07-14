@@ -18,7 +18,6 @@ SOURCES += \
 
 HEADERS += \
     src/calendar/calendar.hh \
-    src/constants/constants.hh \
     src/gui/datelistwidget.hh \
     src/gui/minicalendarwidget.hh \
     src/mainwindow/mainwindow.hh \

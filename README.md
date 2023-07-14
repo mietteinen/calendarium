@@ -12,9 +12,6 @@ The author of this GUI application is Tomi Miettinen, a second-year Computer Sci
 
 # How to build and run
 
-Running the program
-
-
 ## Prerequisites
 
 Before building the application, ensure that you have the following tools installed on your system:
