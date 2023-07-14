@@ -2,6 +2,10 @@
 #define MINICALENDARWIDGET_HH
 
 #include <QWidget>
+#include <QPainter>
+#include <QFont>
+
+#include <src/utilities/constants.hh>
 
 namespace Ui {
 class MiniCalendarWidget;
@@ -15,11 +19,10 @@ public:
     explicit MiniCalendarWidget(int initialYear, QWidget *parent = nullptr);
     ~MiniCalendarWidget();
 
-protected:
-    void focusOutEvent(QFocusEvent* event) override;
-
 private:
     Ui::MiniCalendarWidget *ui;
+
+    QFont navigationFont_;
     int currentYear_;
 };
 

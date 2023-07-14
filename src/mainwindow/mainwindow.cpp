@@ -271,7 +271,7 @@ void MainWindow::openMiniCalendar() {
     if (miniCalendar) { return; }
 
     // Create an instance of MiniCalendarWidget.
-    miniCalendar = new MiniCalendarWidget(2023, this);
+    miniCalendar = new MiniCalendarWidget(displayedYear_, this);
 
     // Find the position of miniCalendarButton and place
     // miniCalendar under it.

@@ -13,38 +13,65 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="horizontalLayoutWidget">
+  <widget class="QFrame" name="miniCalendarFrame">
    <property name="geometry">
     <rect>
-     <x>-1</x>
-     <y>0</y>
-     <width>321</width>
-     <height>41</height>
+     <x>10</x>
+     <y>10</y>
+     <width>301</width>
+     <height>221</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QPushButton" name="prevYearButton">
-      <property name="text">
-       <string>Previous</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>CURRENT YEAR</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="nextYearButton">
-      <property name="text">
-       <string>Next</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>281</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="miniNavigationLayout">
+     <item>
+      <widget class="QPushButton" name="prevYearButton">
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="currentYearLabel">
+       <property name="text">
+        <string>CURRENT YEAR</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="nextYearButton">
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>49</y>
+      <width>281</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="miniCalendarGrid"/>
+   </widget>
   </widget>
  </widget>
  <resources/>
