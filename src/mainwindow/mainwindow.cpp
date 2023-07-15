@@ -109,6 +109,18 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
         }
     }
 
+    if (event->type() == QEvent::Move) {
+
+        if (miniCalendar != nullptr) {
+
+            // Find the new position of the miniCalendarButton
+            // and move miniCalendar accordingly.
+            QPoint buttonPos = ui->miniCalendarButton
+                    ->mapToGlobal(QPoint(0, ui->miniCalendarButton->height() - 10));
+            miniCalendar->move(buttonPos);
+        }
+    }
+
     return QMainWindow::eventFilter(object, event);
 }
 
@@ -279,13 +291,12 @@ void MainWindow::openMiniCalendar() {
     // Find the position of miniCalendarButton and place
     // miniCalendar under it.
     QPoint buttonPos = ui->miniCalendarButton
-            ->mapToGlobal(QPoint(0, ui->miniCalendarButton->height()));
+            ->mapToGlobal(QPoint(0, ui->miniCalendarButton->height() - 10));
     miniCalendar->move(buttonPos);
 
     // Set window flags for miniCalendar.
-    miniCalendar->setWindowFlags(Qt::Window |
-                                 Qt::FramelessWindowHint |
-                                 Qt::WindowStaysOnTopHint);
+    miniCalendar->setWindowFlags(Qt::Tool |
+                                 Qt::FramelessWindowHint);
 
     miniCalendar->show();
 }
