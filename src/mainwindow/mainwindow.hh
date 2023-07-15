@@ -43,6 +43,8 @@ private:
     QFont titleFont_;
     QFont navigationFont_;
 
+    QString style_;
+
     Calendar* calendar_;
 
     int displayedYear_;

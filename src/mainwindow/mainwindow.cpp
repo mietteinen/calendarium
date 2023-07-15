@@ -51,12 +51,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->colorModeButton->setCheckable(true);
 
-    // Connect next month button
+    // Moving to the next month via the arrow buttons.
     connect(ui->nextMonthButton, &QPushButton::clicked, this, [this]() {
         changeMonth(1);
     });
 
-    // Connect previous month button
+    // Moving to the previous month via the arrow buttons.
     connect(ui->prevMonthButton, &QPushButton::clicked, this, [this]() {
         changeMonth(-1);
     });
@@ -76,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
     displayedYear_ = currentDate.first;
     displayedMonth_ = currentDate.second;
 
+    miniCalendar = nullptr;
     calendar_ = nullptr;
     createCalendar(displayedYear_,
                    displayedMonth_);
@@ -90,17 +91,17 @@ MainWindow::~MainWindow() {
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
 
-    if (miniCalendar && event->type() == QEvent::MouseButtonPress)
-    {
+    if (miniCalendar && event->type() == QEvent::MouseButtonPress) {
+
         QWidget* clickedWidget = qobject_cast<QWidget*>(object);
-        if (clickedWidget)
-        {
+        if (clickedWidget) {
+
             // Check if the clicked widget is neither
             // the miniCalendar nor its descendant.
             if (clickedWidget != miniCalendar &&
                 clickedWidget != ui->miniCalendarButton &&
-                !miniCalendar->isAncestorOf(clickedWidget))
-            {
+                !miniCalendar->isAncestorOf(clickedWidget)) {
+
                 // Delete the miniCalendar and set the pointer to nullptr
                 delete miniCalendar;
                 miniCalendar = nullptr;
@@ -113,7 +114,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
 
 void MainWindow::createCalendar(int year, int month) {
 
-    if (calendar_) { delete calendar_; }
+    if (calendar_) delete calendar_;
 
     calendar_ = new Calendar(year, month);
 
@@ -126,7 +127,7 @@ void MainWindow::createCalendar(int year, int month) {
         delete item;
     }
 
-    // Loop through the calendarVector and add the days to the grid layout
+    // Loop through the calendarVector and add the days to the grid layout.
     int row = 0;
     int col = 0;
     for (int day : calendarVector) {
@@ -225,6 +226,7 @@ void MainWindow::changeColorMode(bool darkMode) {
         ui->yearLabel->setStyleSheet("QLabel {"
                                      "color: " + Colors::lightMain + ";"
                                      "}");
+        style_ = "dark";
 
     } else {
         setStyleSheet("QMainWindow {"
@@ -262,16 +264,17 @@ void MainWindow::changeColorMode(bool darkMode) {
         ui->yearLabel->setStyleSheet("QLabel {"
                                      "color: " + Colors::darkMain + ";"
                                      "}");
+        style_ = "light";
     }
 }
 
 void MainWindow::openMiniCalendar() {
 
     // Check if miniCalendar is already open.
-    if (miniCalendar) { return; }
+    if (miniCalendar != nullptr) return;
 
     // Create an instance of MiniCalendarWidget.
-    miniCalendar = new MiniCalendarWidget(displayedYear_, this);
+    miniCalendar = new MiniCalendarWidget(displayedYear_, style_, this);
 
     // Find the position of miniCalendarButton and place
     // miniCalendar under it.

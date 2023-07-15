@@ -16,14 +16,19 @@ class MiniCalendarWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit MiniCalendarWidget(int initialYear, QWidget *parent = nullptr);
+    explicit MiniCalendarWidget(int initialYear,
+                                QString currentStyle,
+                                QWidget *parent = nullptr);
     ~MiniCalendarWidget();
+
+    void setStyling();
 
 private:
     Ui::MiniCalendarWidget *ui;
 
     QFont navigationFont_;
     int currentYear_;
+    QString style_;
 };
 
 #endif // MINICALENDARWIDGET_HH

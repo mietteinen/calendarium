@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>806</width>
     <height>600</height>
    </rect>
   </property>
@@ -25,6 +25,7 @@
            <font>
             <family>Ubuntu</family>
             <pointsize>42</pointsize>
+            <weight>50</weight>
             <italic>false</italic>
             <bold>false</bold>
            </font>
@@ -89,6 +90,9 @@
           <property name="text">
            <string>Calendar</string>
           </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -146,7 +150,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>806</width>
      <height>20</height>
     </rect>
    </property>
