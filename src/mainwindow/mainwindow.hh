@@ -1,16 +1,17 @@
 #ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 
+#include <QFontDatabase>
 #include <QMainWindow>
 #include <QLabel>
-#include <QFontDatabase>
 #include <QDebug>
+#include <QIcon>
 
-#include <src/calendar/calendar.hh>
-#include <src/gui/datelistwidget.hh>
 #include <src/gui/minicalendarwidget.hh>
+#include <src/gui/datelistwidget.hh>
 #include <src/utilities/utilities.hh>
 #include <src/utilities/constants.hh>
+#include <src/calendar/calendar.hh>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,9 +40,13 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    MiniCalendarWidget* miniCalendar;
 
     QFont titleFont_;
     QFont navigationFont_;
+
+    QIcon calendarIcon_;
+    QIcon colorModeIcon_;
 
     QString style_;
 
@@ -51,6 +56,5 @@ private:
     int displayedMonth_;
 
     std::vector<QString> monthNames_;
-    MiniCalendarWidget* miniCalendar;
 };
 #endif // MAINWINDOW_HH

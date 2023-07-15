@@ -14,39 +14,43 @@ MainWindow::MainWindow(QWidget *parent)
                    "September", "October", "November", "December"};
 
     titleFont_ = QFont("Karla SemiBold", 24);
-    navigationFont_ = QFont("Karla SemiBold", 11);
+    navigationFont_ = QFont("Karla SemiBold", 14);
+
+    calendarIcon_ = QIcon(":/icons/icons/CM_BLACK.png");
 
     std::pair<int, int> currentDate = util::getCurrentYearAndMonth();
 
-    ui->yearSearchBox->setText(QString::number(currentDate.first));
-    ui->monthSearchBox->setText(QString::number(currentDate.second));
-
-    ui->yearSearchBox->setMaximumWidth(50);
-    ui->monthSearchBox->setMaximumWidth(50);
-
-    ui->searchButton->setMaximumWidth(100);
-    ui->searchButton->setMinimumWidth(100);
-
-    ui->nextMonthButton->setMinimumWidth(30);
-    ui->nextMonthButton->setMinimumHeight(30);
+    ui->nextMonthButton->setMaximumWidth(50);
+    ui->nextMonthButton->setMinimumWidth(50);
+    ui->nextMonthButton->setMaximumHeight(50);
+    ui->nextMonthButton->setMinimumHeight(50);
     ui->nextMonthButton->setFont(navigationFont_);
 
-    ui->prevMonthButton->setMinimumWidth(30);
-    ui->prevMonthButton->setMinimumHeight(30);
+    ui->prevMonthButton->setMaximumWidth(50);
+    ui->prevMonthButton->setMinimumWidth(50);
+    ui->prevMonthButton->setMaximumHeight(50);
+    ui->prevMonthButton->setMinimumHeight(50);
     ui->prevMonthButton->setFont(navigationFont_);
 
-    ui->colorModeButton->setMaximumWidth(100);
-    ui->colorModeButton->setMinimumWidth(100);
+    ui->colorModeButton->setMaximumWidth(50);
+    ui->colorModeButton->setMinimumWidth(50);
+    ui->colorModeButton->setMaximumHeight(50);
+    ui->colorModeButton->setMinimumHeight(50);
 
-    ui->miniCalendarButton->setMaximumWidth(100);
-    ui->miniCalendarButton->setMinimumWidth(100);
+    ui->miniCalendarButton->setMaximumWidth(50);
+    ui->miniCalendarButton->setMinimumWidth(50);
+    ui->miniCalendarButton->setMaximumHeight(50);
+    ui->miniCalendarButton->setMinimumHeight(50);
     ui->miniCalendarButton->setCheckable(true);
+
+    // Set the icon for miniCalendar.
+    ui->miniCalendarButton->setText("");
+    ui->miniCalendarButton->setIcon(calendarIcon_);
+    ui->miniCalendarButton->setIconSize(QSize(32, 32));
 
     ui->yearNumberLabel->setFont(titleFont_);
     ui->monthNameLabel->setFont(titleFont_);
 
-    ui->yearLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
-    ui->monthLabel->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
     ui->yearNumberLabel->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
 
     ui->colorModeButton->setCheckable(true);
@@ -61,12 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
         changeMonth(-1);
     });
 
-    connect(ui->searchButton, &QPushButton::clicked, this, [this]() {
-        int year = ui->yearSearchBox->text().toInt();
-        int month = ui->monthSearchBox->text().toInt();
-        createCalendar(year, month);
-    });
-
+    // Toggling dark and light mode.
     connect(ui->colorModeButton, &QPushButton::toggled,
                            this, &MainWindow::changeColorMode);
 
@@ -116,7 +115,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
             // Find the new position of the miniCalendarButton
             // and move miniCalendar accordingly.
             QPoint buttonPos = ui->miniCalendarButton
-                    ->mapToGlobal(QPoint(0, ui->miniCalendarButton->height() - 10));
+                    ->mapToGlobal(QPoint(-250, ui->miniCalendarButton->height() - 10));
             miniCalendar->move(buttonPos);
         }
     }
@@ -151,7 +150,7 @@ void MainWindow::createCalendar(int year, int month) {
         } else {
             // Create a custom QFrame to allow for more styling.
             QFrame* frame = new QFrame;
-            frame->setStyleSheet("QFrame { padding: 2px; "
+            frame->setStyleSheet("QFrame { padding: 4px; "
                                           "border: 1px solid black; "
                                           "border-radius: 10px;"
                                           "background-color: " + Colors::primaryColor
@@ -195,9 +194,6 @@ void MainWindow::changeMonth(int direction) {
         displayedMonth_ = (displayedMonth_ + 11) % 12 + 1;
     }
 
-    ui->yearSearchBox->setText(QString::number(displayedYear_));
-    ui->monthSearchBox->setText(QString::number(displayedMonth_));
-
     createCalendar(displayedYear_, displayedMonth_);
 }
 
@@ -208,7 +204,7 @@ void MainWindow::changeColorMode(bool darkMode) {
                       "background-color: " + Colors::darkMain + ";"
                       "}"
                       "QPushButton {"
-                      "border: none;"
+                      "border: 1px solid black;"
                       "border-radius: 6px;"
                       "background-color: " + Colors::accentColor + ";"
                       "color: black;"
@@ -232,12 +228,6 @@ void MainWindow::changeColorMode(bool darkMode) {
         ui->yearNumberLabel->setStyleSheet("QLabel {"
                                            "color: " + Colors::lightMain + ";"
                                            "}");
-        ui->monthLabel->setStyleSheet("QLabel {"
-                                     "color: " + Colors::lightMain + ";"
-                                     "}");
-        ui->yearLabel->setStyleSheet("QLabel {"
-                                     "color: " + Colors::lightMain + ";"
-                                     "}");
         style_ = "dark";
 
     } else {
@@ -246,7 +236,7 @@ void MainWindow::changeColorMode(bool darkMode) {
                       "border-color: " + Colors::primaryColor + ";"
                       "}"
                       "QPushButton {"
-                      "border: none;"
+                      "border: 1px solid black;"
                       "border-radius: 6px;"
                       "background-color: " + Colors::accentColor + ";"
                       "color: black;"
@@ -270,12 +260,6 @@ void MainWindow::changeColorMode(bool darkMode) {
         ui->yearNumberLabel->setStyleSheet("QLabel {"
                                            "color: " + Colors::darkMain + ";"
                                            "}");
-        ui->monthLabel->setStyleSheet("QLabel {"
-                                     "color: " + Colors::darkMain + ";"
-                                     "}");
-        ui->yearLabel->setStyleSheet("QLabel {"
-                                     "color: " + Colors::darkMain + ";"
-                                     "}");
         style_ = "light";
     }
 }
@@ -291,7 +275,7 @@ void MainWindow::openMiniCalendar() {
     // Find the position of miniCalendarButton and place
     // miniCalendar under it.
     QPoint buttonPos = ui->miniCalendarButton
-            ->mapToGlobal(QPoint(0, ui->miniCalendarButton->height() - 10));
+            ->mapToGlobal(QPoint(-250, ui->miniCalendarButton->height() - 10));
     miniCalendar->move(buttonPos);
 
     // Set window flags for miniCalendar.

@@ -4,6 +4,7 @@
 #include <QListWidget>
 #include <QLabel>
 #include <QFont>
+#include <QSize>
 
 class DateListWidget : public QListWidget {
 

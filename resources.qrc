@@ -5,4 +5,7 @@
         <file>fonts/Inconsolata-Medium.ttf</file>
         <file>fonts/Karla-SemiBold.ttf</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file>icons/CM_BLACK.png</file>
+    </qresource>
 </RCC>

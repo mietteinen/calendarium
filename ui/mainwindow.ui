@@ -51,37 +51,10 @@
       </item>
       <item row="3" column="3">
        <layout class="QGridLayout" name="searchLayout">
-        <item row="0" column="2">
-         <widget class="QLabel" name="yearLabel">
-          <property name="text">
-           <string>Year:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="4" rowspan="2">
-         <widget class="QPushButton" name="searchButton">
-          <property name="text">
-           <string>Make Calendar</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QLineEdit" name="yearSearchBox"/>
-        </item>
         <item row="0" column="1" rowspan="2">
          <widget class="QPushButton" name="colorModeButton">
           <property name="text">
            <string>Mode</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QLineEdit" name="monthSearchBox"/>
-        </item>
-        <item row="1" column="2">
-         <widget class="QLabel" name="monthLabel">
-          <property name="text">
-           <string>Month:</string>
           </property>
          </widget>
         </item>
