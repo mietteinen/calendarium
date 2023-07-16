@@ -9,8 +9,10 @@ DateListWidget::DateListWidget(int dateNumber) {
 
     QSize dateItemSize = item->sizeHint();
     dateItemSize.setHeight(30);
+    dateItemSize.setWidth(0);
     item->setSizeHint(dateItemSize);
 
+    dateLabel->setFixedHeight(30);
     dateLabel->setFont(dateNumberFont);
 
     QListWidget::setItemWidget(item, dateLabel);
