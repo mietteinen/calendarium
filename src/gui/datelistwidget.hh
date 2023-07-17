@@ -2,6 +2,7 @@
 #define DATELISTWIDGET_HH
 
 #include <QListWidget>
+#include <vector>
 #include <QLabel>
 #include <QFont>
 #include <QSize>

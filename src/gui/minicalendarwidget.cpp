@@ -14,6 +14,10 @@ MiniCalendarWidget::MiniCalendarWidget(int initialYear,
 
     navigationFont_ = QFont("Karla SemiBold", 11);
 
+    monthAbbreviations = {"", "Jan", "Feb", "Mar", "Apr",
+                              "May", "Jun", "Jul", "Aug",
+                              "Sep", "Oct", "Nov", "Dec"};
+
     ui->currentYearLabel->setText(QString::number(currentYear_));
     ui->currentYearLabel->setFont(navigationFont_);
     ui->currentYearLabel->setAlignment(Qt::AlignCenter);
@@ -26,6 +30,7 @@ MiniCalendarWidget::MiniCalendarWidget(int initialYear,
     ui->prevYearButton->setMinimumWidth(50);
     ui->prevYearButton->setFont(navigationFont_);
 
+    createMiniCalendar();
     setStyling();
 }
 
@@ -61,4 +66,24 @@ void MiniCalendarWidget::setStyling() {
                       "}");
     }
 
+}
+
+void MiniCalendarWidget::createMiniCalendar() {
+
+    int monthIndex = 1;
+    for (int row = 0; row < 3; ++row)
+    {
+        for (int col = 0; col < 4; ++col)
+        {
+            QString abbreviation = monthAbbreviations[monthIndex];
+
+            QPushButton* button = new QPushButton();
+            button->setMaximumHeight(30);
+            button->setMinimumHeight(30);
+            button->setText(abbreviation);
+            ui->miniCalendarGrid->addWidget(button, row, col);
+
+            monthIndex++;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 #ifndef MINICALENDARWIDGET_HH
 #define MINICALENDARWIDGET_HH
 
+#include <QPushButton>
 #include <QWidget>
 #include <QPainter>
 #include <QFont>
@@ -29,6 +30,10 @@ private:
     QFont navigationFont_;
     int currentYear_;
     QString style_;
+
+    std::vector<QString> monthAbbreviations;
+
+    void createMiniCalendar();
 };
 
 #endif // MINICALENDARWIDGET_HH
