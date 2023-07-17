@@ -102,6 +102,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
                 !miniCalendar->isAncestorOf(clickedWidget)) {
 
                 // Delete the miniCalendar and set the pointer to nullptr
+                ui->miniCalendarButton->setChecked(false);
                 delete miniCalendar;
                 miniCalendar = nullptr;
             }
@@ -264,27 +265,39 @@ void MainWindow::changeColorMode(bool darkMode) {
     }
 }
 
-void MainWindow::openMiniCalendar() {
+void MainWindow::openMiniCalendar(bool open) {
 
-    // Check if miniCalendar is already open.
-    if (miniCalendar != nullptr) return;
+    if (open) {
 
-    // Create an instance of MiniCalendarWidget.
-    miniCalendar = new MiniCalendarWidget(displayedYear_, style_, this, this);
+        // Create an instance of MiniCalendarWidget if it's not already open.
+        if (miniCalendar == nullptr)
+        {
+            miniCalendar = new MiniCalendarWidget(displayedYear_, style_, this, this);
 
-    // Find the position of miniCalendarButton and place
-    // miniCalendar under it.
-    QPoint buttonPos = ui->miniCalendarButton
-            ->mapToGlobal(QPoint(-250, ui->miniCalendarButton->height() - 10));
-    miniCalendar->move(buttonPos);
+            // Find the position of miniCalendarButton and place miniCalendar under it.
+            QPoint buttonPos = ui->miniCalendarButton
+                    ->mapToGlobal(QPoint(-250, ui->miniCalendarButton->height() - 10));
+            miniCalendar->move(buttonPos);
 
-    // Set window flags for miniCalendar.
-    miniCalendar->setWindowFlags(Qt::Tool |
-                                 Qt::FramelessWindowHint);
+            // Set window flags for miniCalendar.
+            miniCalendar->setWindowFlags(Qt::Tool |
+                                         Qt::FramelessWindowHint);
 
-    connect(miniCalendar, &MiniCalendarWidget::monthButtonClicked,
+            connect(miniCalendar, &MiniCalendarWidget::monthButtonClicked,
                     this, &MainWindow::createCalendar);
+        }
 
-    miniCalendar->show();
+        miniCalendar->show();
+    }
+    else {
+
+        // Close miniCalendar if it's open.
+        if (miniCalendar != nullptr)
+        {
+            miniCalendar->close();
+            miniCalendar = nullptr;
+        }
+    }
 }
+
 

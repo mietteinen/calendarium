@@ -32,10 +32,12 @@ MiniCalendarWidget::MiniCalendarWidget(int initialYear,
     ui->prevYearButton->setMinimumWidth(50);
     ui->prevYearButton->setFont(navigationFont_);
 
+    // Moving to next year via the arrow button.
     connect(ui->nextYearButton, &QPushButton::clicked, this, [this]() {
         changeYear(1);
     });
 
+    // Moving to previous year via the arrow button.
     connect(ui->prevYearButton, &QPushButton::clicked, this, [this]() {
         changeYear(-1);
     });

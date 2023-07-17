@@ -38,7 +38,7 @@ protected:
 private slots:
     void changeMonth(int direction);
     void changeColorMode(bool darkMode);
-    void openMiniCalendar();
+    void openMiniCalendar(bool open);
 
 private:
     Ui::MainWindow *ui;
