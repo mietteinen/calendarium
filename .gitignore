@@ -3,6 +3,8 @@
 build-*
 templates/*
 examples/*
+release/*
+debug/*
 *.input
 *.output
 *.stash

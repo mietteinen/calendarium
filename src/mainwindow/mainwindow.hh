@@ -25,15 +25,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-protected:
-    bool eventFilter(QObject* object, QEvent* event) override;
-
-private slots:
+public slots:
     /**
      * @brief Displays the calendar inside
      * the window.
      */
     void createCalendar(int year, int month);
+
+protected:
+    bool eventFilter(QObject* object, QEvent* event) override;
+
+private slots:
     void changeMonth(int direction);
     void changeColorMode(bool darkMode);
     void openMiniCalendar();

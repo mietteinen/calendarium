@@ -270,7 +270,7 @@ void MainWindow::openMiniCalendar() {
     if (miniCalendar != nullptr) return;
 
     // Create an instance of MiniCalendarWidget.
-    miniCalendar = new MiniCalendarWidget(displayedYear_, style_, this);
+    miniCalendar = new MiniCalendarWidget(displayedYear_, style_, this, this);
 
     // Find the position of miniCalendarButton and place
     // miniCalendar under it.
@@ -281,6 +281,9 @@ void MainWindow::openMiniCalendar() {
     // Set window flags for miniCalendar.
     miniCalendar->setWindowFlags(Qt::Tool |
                                  Qt::FramelessWindowHint);
+
+    connect(miniCalendar, &MiniCalendarWidget::monthButtonClicked,
+                    this, &MainWindow::createCalendar);
 
     miniCalendar->show();
 }

@@ -3,9 +3,11 @@
 
 MiniCalendarWidget::MiniCalendarWidget(int initialYear,
                                        QString currentStyle,
+                                       MainWindow* mainWindow,
                                        QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MiniCalendarWidget),
+    mainWindow_(mainWindow),
     currentYear_(initialYear),
     style_(currentStyle) {
 
@@ -29,6 +31,14 @@ MiniCalendarWidget::MiniCalendarWidget(int initialYear,
     ui->prevYearButton->setMaximumWidth(50);
     ui->prevYearButton->setMinimumWidth(50);
     ui->prevYearButton->setFont(navigationFont_);
+
+    connect(ui->nextYearButton, &QPushButton::clicked, this, [this]() {
+        changeYear(1);
+    });
+
+    connect(ui->prevYearButton, &QPushButton::clicked, this, [this]() {
+        changeYear(-1);
+    });
 
     createMiniCalendar();
     setStyling();
@@ -68,6 +78,28 @@ void MiniCalendarWidget::setStyling() {
 
 }
 
+void MiniCalendarWidget::onMonthChange() {
+
+    QPushButton* clickedButton;
+    QString buttonText;
+    int index;
+
+    clickedButton = qobject_cast<QPushButton*>(sender());
+
+    if (!clickedButton) return;
+
+    buttonText = clickedButton->text();
+
+    auto it = std::find(monthAbbreviations.begin(),
+                        monthAbbreviations.end(),
+                        buttonText);
+
+    if (it != monthAbbreviations.end()) {
+        index = std::distance(monthAbbreviations.begin(), it);
+        emit monthButtonClicked(currentYear_, index);
+    }
+}
+
 void MiniCalendarWidget::createMiniCalendar() {
 
     int monthIndex = 1;
@@ -81,9 +113,19 @@ void MiniCalendarWidget::createMiniCalendar() {
             button->setMaximumHeight(30);
             button->setMinimumHeight(30);
             button->setText(abbreviation);
+
+            connect(button, &QPushButton::clicked,
+                      this, &MiniCalendarWidget::onMonthChange);
+
             ui->miniCalendarGrid->addWidget(button, row, col);
 
             monthIndex++;
         }
     }
+}
+
+void MiniCalendarWidget::changeYear(int direction) {
+
+    currentYear_ += direction;
+    ui->currentYearLabel->setText(QString::number(currentYear_));
 }
