@@ -6,8 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow) {
 
     ui->setupUi(this);
+    setWindowTitle("Calendarium");
 
     QApplication::instance()->installEventFilter(this);
+    QGuiApplication::setWindowIcon(QIcon(":/icons/icons/CM_BLACK.png"));
 
     monthNames_ = {"", "January", "February", "March",
                    "April", "May", "June", "July", "August",
@@ -15,8 +17,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     titleFont_ = QFont("Karla SemiBold", 24);
     navigationFont_ = QFont("Karla SemiBold", 14);
-
-    calendarIcon_ = QIcon(":/icons/icons/CM_BLACK.png");
 
     std::pair<int, int> currentDate = util::getCurrentYearAndMonth();
 
@@ -43,10 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->miniCalendarButton->setMinimumHeight(50);
     ui->miniCalendarButton->setCheckable(true);
 
-    // Set the icon for miniCalendar.
+    // Remove text from miniCalendarButton.
     ui->miniCalendarButton->setText("");
-    ui->miniCalendarButton->setIcon(calendarIcon_);
-    ui->miniCalendarButton->setIconSize(QSize(32, 32));
 
     ui->yearNumberLabel->setFont(titleFont_);
     ui->monthNameLabel->setFont(titleFont_);
@@ -217,6 +215,9 @@ void MainWindow::changeColorMode(bool darkMode) {
                       "QPushButton:pressed {"
                       "background-color: " + Colors::accentColor + ";"
                       "}"
+                      "QPushButton:checked {"
+                      "background-color: " + Colors::lightSecondary + ";"
+                      "}"
                       "QLineEdit {"
                       "color: " + Colors::lightMain + ";"
                       "background-color: " + Colors::darkSecondary + ";"
@@ -229,6 +230,10 @@ void MainWindow::changeColorMode(bool darkMode) {
         ui->yearNumberLabel->setStyleSheet("QLabel {"
                                            "color: " + Colors::lightMain + ";"
                                            "}");
+        calendarIcon_ = QIcon(":/icons/icons/CM_BLACK.png");
+        ui->miniCalendarButton->setIcon(calendarIcon_);
+        ui->miniCalendarButton->setIconSize(QSize(32, 32));
+
         style_ = "dark";
 
     } else {
@@ -249,6 +254,9 @@ void MainWindow::changeColorMode(bool darkMode) {
                       "QPushButton:pressed {"
                       "background-color: " + Colors::accentColor + ";"
                       "}"
+                      "QPushButton:checked {"
+                      "background-color: " + Colors::lightSecondary + ";"
+                      "}"
                       "QLineEdit {"
                       "color: " + Colors::darkMain + ";"
                       "background-color: " + Colors::lightSecondary + ";"
@@ -261,6 +269,11 @@ void MainWindow::changeColorMode(bool darkMode) {
         ui->yearNumberLabel->setStyleSheet("QLabel {"
                                            "color: " + Colors::darkMain + ";"
                                            "}");
+
+        calendarIcon_ = QIcon(":/icons/icons/CM_BLACK.png");
+        ui->miniCalendarButton->setIcon(calendarIcon_);
+        ui->miniCalendarButton->setIconSize(QSize(32, 32));
+
         style_ = "light";
     }
 }

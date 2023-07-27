@@ -15,7 +15,7 @@ public:
     /**
      * @brief To be done, for adding new events.
      */
-    void addDate();
+    void addItem();
 
 private:
     QFont dateNumberFont;

@@ -21,6 +21,7 @@ DateListWidget::DateListWidget(int dateNumber) {
     item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
 }
 
-void DateListWidget::addDate() {
+void DateListWidget::addItem() {
+
 
 }
