@@ -1,13 +1,11 @@
-# A desktop calendar app
+# Calendarium
 
-A simple and lightweight desktop calendar for keeping track of upcoming activities (that functionality is coming later).
-
-The program is written in C++, and is based on a Tkinter GUI program written by the author of this program as a school project.
+A simple and lightweight desktop calendar. Built using Qt, with plans to implement an event system.
 
 
 # Author
 
-The author of this GUI application is Tomi Miettinen, a second-year Computer Science student.
+The author of this program is Tomi Miettinen, a second-year Computer Science student.
 
 
 # How to build and run
