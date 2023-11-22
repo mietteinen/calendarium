@@ -5,7 +5,7 @@ A simple and lightweight desktop calendar. Built using Qt, with plans to impleme
 
 # Author
 
-The author of this program is Tomi Miettinen, a second-year Computer Science student.
+Made by Tomi Miettinen (@mietteinen), a second-year Computer Science student.
 
 
 # How to build and run
@@ -43,16 +43,16 @@ To be able to build this project, you have to have make, qmake, and the Qt Core 
 
 ## Build Instructions
 
-1. Clone or download the project repository from [GitHub](https://github.com/mietteinen/calendar-cpp) to your local machine. To clone the project, open the terminal and `cd` to the folder you want to clone the project to. Then type the following command:
+1. Clone or download the project repository from [GitHub](https://github.com/mietteinen/calendarium) to your local machine. To clone the project, open the terminal and `cd` to the folder you want to clone the project to. Then type the following command:
 
     ``` shell
-    git clone https://github.com/mietteinen/calendar-cpp.git
+    git clone https://github.com/mietteinen/calendarium.git
     ```
 
 2. Navigate to the project directory.
 
    ``` shell
-    cd calendar-cpp
+    cd calendarium
     ```
 
 3. Run the following command to generate the project files using qmake:
@@ -78,4 +78,4 @@ To be able to build this project, you have to have make, qmake, and the Qt Core 
 
 - If you encounter any build issues or errors, make sure that you have the correct version of the Qt framework installed and that your environment variables (such as `PATH`) are properly set.
 
-- If you have any questions or need further assistance, please feel free to open an issue in the [project repository](https://github.com/mietteinen/calendar-cpp/issues).
+- If you have any questions or need further assistance, please feel free to open an issue in the [project repository](https://github.com/mietteinen/calendarium/issues).
